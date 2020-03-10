@@ -18,6 +18,7 @@ then
   tar -zxvf latest.tar.gz
   rm -rf latest.tar.gz
 
+  chown -R root.www-data wordpress
   cd -
 fi
 
