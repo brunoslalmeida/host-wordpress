@@ -19,6 +19,7 @@ then
   rm -rf latest.tar.gz
 
   chown -R root.www-data wordpress
+  chmod 661
   cd -
 fi
 
