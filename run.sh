@@ -5,21 +5,20 @@ then
   exit -1
 fi
 
-pwd=$(pwd)
 cwd=$(pwd)/site/$1
 name=wordpress_$1
 
-if ! test -d "$pwd/wordpress"; 
-then
-  wget https://wordpress.org/latest.tar.gz
-  tar -zxvf latest.tar.gz
-  rm -rf latest.tar.gz
-fi
-
+#Always download wp for new projects to ensure latest version
 if ! test -d "$cwd";
 then 
   mkdir -p $cwd
-  cp -R $pwd/wordpress $cwd
+  cd $cwd 
+  
+  wget https://wordpress.org/latest.tar.gz
+  tar -zxvf latest.tar.gz
+  rm -rf latest.tar.gz
+
+  cd -
 fi
 
 docker stop $name
