@@ -8,21 +8,6 @@ fi
 cwd=$(pwd)/site/$1
 name=wordpress_$1
 
-#Always download wp for new projects to ensure latest version
-if ! test -d "$cwd";
-then 
-  mkdir -p $cwd
-  cd $cwd 
-  
-  wget https://wordpress.org/latest.tar.gz
-  tar -zxvf latest.tar.gz
-  rm -rf latest.tar.gz
-
-  chown -R root.www-data wordpress
-  chmod 661
-  cd -
-fi
-
 docker stop $name
 docker rm nginx $name
 
@@ -31,5 +16,5 @@ docker run -d \
   --hostname $name \
   --restart=always \
   --network internal \
-  -v $cwd/wordpress:/var/www/html \
+  -v $cwd:/var/www/html \
   wordpress
